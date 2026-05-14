@@ -14,18 +14,16 @@ export default function ProjectDetail() {
     const [hover, setHover] = useState(0);
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [userName, setUserName] = useState(""); // Stato per memorizzare il nome
 
-    // Funzione per gestire l'invio senza ricaricare la pagina
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
 
-        // Prendiamo i dati dal form
         const form = e.currentTarget;
         const formData = new FormData(form);
-
-        // DEBUG: Vediamo nel terminale del browser cosa stiamo inviando
-        console.log("Dati in invio:", Object.fromEntries(formData.entries()));
+        const nameInput = formData.get("name") as string;
+        setUserName(nameInput); // Salviamo il nome per il messaggio finale
 
         try {
             const response = await fetch("https://formspree.io/f/xrejvwpr", {
@@ -36,17 +34,14 @@ export default function ProjectDetail() {
                 }
             });
 
-            const data = await response.json();
-            console.log("Risposta da Formspree:", data);
-
             if (response.ok) {
                 setSubmitted(true);
             } else {
+                const data = await response.json();
                 alert("Errore Formspree: " + (data.error || "Riprova"));
             }
         } catch (error) {
-            console.error("Errore Fetch:", error);
-            alert("Errore di connessione. Controlla il terminale (F12).");
+            alert("Errore di connessione. Riprova più tardi.");
         } finally {
             setLoading(false);
         }
@@ -74,90 +69,98 @@ export default function ProjectDetail() {
                 marginTop: '50px', padding: '30px', border: '1px solid var(--border)',
                 borderRadius: '24px', background: 'var(--panel)', boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
             }}>
-                <h3 style={{ marginBottom: '10px' }}>Lascia un feedback</h3>
-
+                
                 {!submitted ? (
-                    <form onSubmit={handleSubmit}>
-                        {/* Campo Nome */}
-                        <div style={{ marginBottom: '20px' }}>
-                            <label style={{ display: 'block', fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>Il tuo Nome</label>
-                            <input
-                                type="text"
-                                name="name"
-                                required
-                                placeholder="Esempio: Mario Rossi"
-                                style={{
-                                    width: '100%', padding: '12px', background: '#000', border: '1px solid #222',
-                                    color: 'white', borderRadius: '10px', outline: 'none'
-                                }}
-                            />
-                        </div>
-
-                        {/* Valutazione in Stelle */}
-                        <div style={{ marginBottom: '20px' }}>
-                            <label style={{ display: 'block', fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>Valutazione</label>
-                            <div style={{ display: 'flex', gap: '5px' }}>
-                                {[1, 2, 3, 4, 5].map((star) => (
-                                    <button
-                                        key={star}
-                                        type="button"
-                                        onClick={() => setRating(star)}
-                                        onMouseEnter={() => setHover(star)}
-                                        onMouseLeave={() => setHover(0)}
-                                        style={{
-                                            background: 'none', border: 'none', cursor: 'pointer', outline: 'none',
-                                            fontSize: '1.8rem', color: (hover || rating) >= star ? 'var(--accent)' : '#222',
-                                            transition: 'transform 0.1s, color 0.2s',
-                                            transform: (hover || rating) >= star ? 'scale(1.1)' : 'scale(1)'
-                                        }}
-                                    >
-                                        ★
-                                    </button>
-                                ))}
+                    <>
+                        <h3 style={{ marginBottom: '10px' }}>Lascia un feedback</h3>
+                        <form onSubmit={handleSubmit}>
+                            <div style={{ marginBottom: '20px' }}>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>Il tuo Nome</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    required
+                                    placeholder="Esempio: Mario Rossi"
+                                    style={{
+                                        width: '100%', padding: '12px', background: '#000', border: '1px solid #222',
+                                        color: 'white', borderRadius: '10px', outline: 'none'
+                                    }}
+                                />
                             </div>
-                            <input type="hidden" name="rating" value={rating} />
-                        </div>
 
-                        {/* Commento */}
-                        <div style={{ marginBottom: '20px' }}>
-                            <label style={{ display: 'block', fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>Suggerimenti</label>
-                            <textarea
-                                name="message"
-                                required
-                                placeholder="Cosa posso migliorare?"
+                            <div style={{ marginBottom: '20px' }}>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>Valutazione</label>
+                                <div style={{ display: 'flex', gap: '5px' }}>
+                                    {[1, 2, 3, 4, 5].map((star) => (
+                                        <button
+                                            key={star}
+                                            type="button"
+                                            onClick={() => setRating(star)}
+                                            onMouseEnter={() => setHover(star)}
+                                            onMouseLeave={() => setHover(0)}
+                                            style={{
+                                                background: 'none', border: 'none', cursor: 'pointer', outline: 'none',
+                                                fontSize: '1.8rem', color: (hover || rating) >= star ? 'var(--accent)' : '#222',
+                                                transition: 'transform 0.1s, color 0.2s',
+                                                transform: (hover || rating) >= star ? 'scale(1.1)' : 'scale(1)'
+                                            }}
+                                        >
+                                            ★
+                                        </button>
+                                    ))}
+                                </div>
+                                <input type="hidden" name="rating" value={rating} />
+                            </div>
+
+                            <div style={{ marginBottom: '20px' }}>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>Suggerimenti</label>
+                                <textarea
+                                    name="message"
+                                    required
+                                    placeholder="Cosa posso migliorare?"
+                                    style={{
+                                        width: '100%', padding: '12px', background: '#000', border: '1px solid #222',
+                                        color: 'white', borderRadius: '10px', minHeight: '100px', outline: 'none'
+                                    }}
+                                />
+                            </div>
+
+                            <input type="hidden" name="_subject" value={`Nuovo Feedback per ${project.title}`} />
+                            <input type="hidden" name="project_name" value={project.title} />
+
+                            <button
+                                type="submit"
+                                disabled={rating === 0 || loading}
                                 style={{
-                                    width: '100%', padding: '12px', background: '#000', border: '1px solid #222',
-                                    color: 'white', borderRadius: '10px', minHeight: '100px', outline: 'none'
+                                    width: '100%', background: rating > 0 ? 'var(--accent)' : '#111',
+                                    color: rating > 0 ? 'black' : '#444', border: 'none',
+                                    padding: '15px', borderRadius: '12px', fontWeight: 'bold',
+                                    cursor: rating > 0 ? 'pointer' : 'not-allowed', transition: '0.3s',
+                                    opacity: loading ? 0.7 : 1
                                 }}
-                            />
-                        </div>
-
-                        {/* Dati nascosti per Formspree */}
-                        <input type="hidden" name="_subject" value={`Nuovo Feedback per ${project.title}`} />
-                        <input type="hidden" name="project_name" value={project.title} />
-
-                        <button
-                            type="submit"
-                            disabled={rating === 0 || loading}
-                            style={{
-                                width: '100%', background: rating > 0 ? 'var(--accent)' : '#111',
-                                color: rating > 0 ? 'black' : '#444', border: 'none',
-                                padding: '15px', borderRadius: '12px', fontWeight: 'bold',
-                                cursor: rating > 0 ? 'pointer' : 'not-allowed', transition: '0.3s',
-                                opacity: loading ? 0.7 : 1
-                            }}
-                        >
-                            {loading ? "Invio in corso..." : "Invia Feedback"}
-                        </button>
-                    </form>
+                            >
+                                {loading ? "Invio in corso..." : "Invia Feedback"}
+                            </button>
+                        </form>
+                    </>
                 ) : (
                     <div style={{ textAlign: 'center', padding: '20px' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '10px' }}>✅</div>
-                        <p style={{ color: 'var(--accent)', fontWeight: 'bold', fontSize: '1.2rem' }}>Feedback inviato!</p>
-                        <p style={{ fontSize: '0.9rem', color: '#666', marginTop: '5px' }}>Grazie Alessandro, riceverai una notifica via mail.</p>
+                        <div style={{ fontSize: '3.5rem', marginBottom: '15px' }}>✨</div>
+                        <h2 style={{ color: 'var(--accent)', marginBottom: '10px' }}>Grazie, {userName}!</h2>
+                        <p style={{ color: '#ccc', lineHeight: '1.5' }}>
+                            Il tuo feedback per <strong>{project.title}</strong> è prezioso. 
+                            Lo userò per migliorare l'esperienza e aggiungere nuove funzionalità!
+                        </p>
+                        <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '15px' }}>
+                            Ho appena ricevuto una notifica sulla mia mail.
+                        </p>
                         <button
-                            onClick={() => setSubmitted(false)}
-                            style={{ background: 'none', border: 'none', color: '#444', cursor: 'pointer', textDecoration: 'underline', marginTop: '20px' }}
+                            onClick={() => { setSubmitted(false); setRating(0); }}
+                            style={{ 
+                                background: 'rgba(45, 212, 191, 0.1)', border: '1px solid var(--accent)', 
+                                color: 'var(--accent)', padding: '10px 20px', borderRadius: '10px', 
+                                cursor: 'pointer', marginTop: '25px', fontSize: '0.9rem' 
+                            }}
                         >
                             Invia un altro suggerimento
                         </button>
