@@ -7,8 +7,8 @@ import Link from 'next/link';
 export default function ProjectDetail() {
     const params = useParams();
     
-    // CORREZIONE 1: Gestione sicura dell'ID per evitare errori di build
-    const id = Array.isArray(params?.id) ? params.id[0] : params?.id;
+    // Recupero sicuro dell'ID: gestisce sia stringa che array
+    const id = Array.isArray(params?.id) ? params.id[0] : (params?.id as string);
     const project = id ? projectsData[id] : null;
 
     // Stati per il modulo feedback
@@ -48,12 +48,14 @@ export default function ProjectDetail() {
         }
     };
 
-    // CORREZIONE 2: Controllo esistenza progetto prima del rendering
+    // Controllo esistenza progetto
     if (!project) {
         return (
-            <div className="container">
+            <div className="container" style={{ textAlign: 'center', marginTop: '100px' }}>
                 <h1 style={{ color: 'white' }}>Progetto non trovato</h1>
-                <Link href="/" style={{ color: 'var(--accent)' }}>Torna alla Home</Link>
+                <Link href="/" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>
+                    Torna alla Home
+                </Link>
             </div>
         );
     }
@@ -73,11 +75,12 @@ export default function ProjectDetail() {
                 Vai al Progetto Live
             </a>
 
+            {/* SEZIONE FEEDBACK */}
             <div style={{
                 marginTop: '50px', padding: '30px', border: '1px solid var(--border)',
                 borderRadius: '24px', background: 'var(--panel)', boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
             }}>
-                
+
                 {!submitted ? (
                     <>
                         <h3 style={{ marginBottom: '10px', color: 'white' }}>Lascia un feedback</h3>
@@ -160,10 +163,10 @@ export default function ProjectDetail() {
                         </p>
                         <button
                             onClick={() => { setSubmitted(false); setRating(0); }}
-                            style={{ 
-                                background: 'rgba(45, 212, 191, 0.1)', border: '1px solid var(--accent)', 
-                                color: 'var(--accent)', padding: '10px 20px', borderRadius: '10px', 
-                                cursor: 'pointer', marginTop: '25px', fontSize: '0.9rem' 
+                            style={{
+                                background: 'rgba(45, 212, 191, 0.1)', border: '1px solid var(--accent)',
+                                color: 'var(--accent)', padding: '10px 20px', borderRadius: '10px',
+                                cursor: 'pointer', marginTop: '25px', fontSize: '0.9rem'
                             }}
                         >
                             Invia un altro suggerimento
