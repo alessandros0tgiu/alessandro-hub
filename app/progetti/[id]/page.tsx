@@ -6,15 +6,17 @@ import Link from 'next/link';
 
 export default function ProjectDetail() {
     const params = useParams();
-    const id = params.id as string;
-    const project = projectsData[id];
+    
+    // CORREZIONE 1: Gestione sicura dell'ID per evitare errori di build
+    const id = Array.isArray(params?.id) ? params.id[0] : params?.id;
+    const project = id ? projectsData[id] : null;
 
     // Stati per il modulo feedback
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [userName, setUserName] = useState(""); // Stato per memorizzare il nome
+    const [userName, setUserName] = useState("");
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -23,7 +25,7 @@ export default function ProjectDetail() {
         const form = e.currentTarget;
         const formData = new FormData(form);
         const nameInput = formData.get("name") as string;
-        setUserName(nameInput); // Salviamo il nome per il messaggio finale
+        setUserName(nameInput);
 
         try {
             const response = await fetch("https://formspree.io/f/xrejvwpr", {
@@ -37,17 +39,24 @@ export default function ProjectDetail() {
             if (response.ok) {
                 setSubmitted(true);
             } else {
-                const data = await response.json();
-                alert("Errore Formspree: " + (data.error || "Riprova"));
+                alert("Errore nell'invio. Riprova.");
             }
         } catch (error) {
-            alert("Errore di connessione. Riprova più tardi.");
+            alert("Errore di connessione.");
         } finally {
             setLoading(false);
         }
     };
 
-    if (!project) return <div className="container">Progetto non trovato</div>;
+    // CORREZIONE 2: Controllo esistenza progetto prima del rendering
+    if (!project) {
+        return (
+            <div className="container">
+                <h1 style={{ color: 'white' }}>Progetto non trovato</h1>
+                <Link href="/" style={{ color: 'var(--accent)' }}>Torna alla Home</Link>
+            </div>
+        );
+    }
 
     return (
         <div className="container" style={{ textAlign: 'left', maxWidth: '600px' }}>
@@ -55,16 +64,15 @@ export default function ProjectDetail() {
                 ← Torna alla Home
             </Link>
 
-            <h1 style={{ marginTop: '20px', fontSize: '2.5rem' }}>{project.title}</h1>
+            <h1 style={{ marginTop: '20px', fontSize: '2.5rem', color: 'white' }}>{project.title}</h1>
             <p style={{ color: '#ccc', lineHeight: '1.6', fontSize: '1.1rem', marginBottom: '30px' }}>
                 {project.description}
             </p>
 
-            <a href={project.link} target="_blank" className="hub-card">
+            <a href={project.link} target="_blank" rel="noopener noreferrer" className="hub-card">
                 Vai al Progetto Live
             </a>
 
-            {/* SEZIONE FEEDBACK */}
             <div style={{
                 marginTop: '50px', padding: '30px', border: '1px solid var(--border)',
                 borderRadius: '24px', background: 'var(--panel)', boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
@@ -72,7 +80,7 @@ export default function ProjectDetail() {
                 
                 {!submitted ? (
                     <>
-                        <h3 style={{ marginBottom: '10px' }}>Lascia un feedback</h3>
+                        <h3 style={{ marginBottom: '10px', color: 'white' }}>Lascia un feedback</h3>
                         <form onSubmit={handleSubmit}>
                             <div style={{ marginBottom: '20px' }}>
                                 <label style={{ display: 'block', fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>Il tuo Nome</label>
@@ -148,11 +156,7 @@ export default function ProjectDetail() {
                         <div style={{ fontSize: '3.5rem', marginBottom: '15px' }}>✨</div>
                         <h2 style={{ color: 'var(--accent)', marginBottom: '10px' }}>Grazie, {userName}!</h2>
                         <p style={{ color: '#ccc', lineHeight: '1.5' }}>
-                            Il tuo feedback per <strong>{project.title}</strong> è prezioso. 
-                            Lo userò per migliorare l'esperienza e aggiungere nuove funzionalità!
-                        </p>
-                        <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '15px' }}>
-                            Ho appena ricevuto una notifica sulla mia mail.
+                            Il tuo feedback per <strong>{project.title}</strong> è stato inviato correttamente.
                         </p>
                         <button
                             onClick={() => { setSubmitted(false); setRating(0); }}
