@@ -67,9 +67,35 @@ export default function ProjectDetail() {
             </Link>
 
             <h1 style={{ marginTop: '20px', fontSize: '2.5rem', color: 'white' }}>{project.title}</h1>
-            <p style={{ color: '#ccc', lineHeight: '1.6', fontSize: '1.1rem', marginBottom: '30px' }}>
+            <p style={{ color: '#ccc', lineHeight: '1.6', fontSize: '1.1rem', marginBottom: '20px' }}>
                 {project.description}
             </p>
+
+            {/* VISUALIZZAZIONE TAGS */}
+            <div style={{ 
+                display: 'flex', 
+                gap: '8px', 
+                marginBottom: '25px', 
+                flexWrap: 'wrap' 
+            }}>
+                {project.tags.map((tag) => (
+                    <span 
+                        key={tag} 
+                        style={{
+                            fontSize: '0.75rem',
+                            background: 'rgba(45, 212, 191, 0.1)',
+                            color: 'var(--accent)',
+                            padding: '5px 12px',
+                            borderRadius: '50px',
+                            border: '1px solid rgba(45, 212, 191, 0.3)',
+                            fontWeight: '500',
+                            letterSpacing: '0.5px'
+                        }}
+                    >
+                        {tag}
+                    </span>
+                ))}
+            </div>
 
             <a href={project.link} target="_blank" rel="noopener noreferrer" className="hub-card">
                 Vai al Progetto Live

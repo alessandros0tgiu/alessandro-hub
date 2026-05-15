@@ -12,17 +12,17 @@ export default function Hub() {
       {/* Progetti */}
       <h2 className="section-title">I Miei Progetti</h2>
       
-      {/* TaskFlow Premium */}
+      {/* TaskFlow Dark */}
       <Link href="/progetti/taskflow-premium" className="hub-card">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
-        TaskFlow Premium
+        TaskFlow Dark
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}><polyline points="9 18 15 12 9 6"/></svg>
       </Link>
 
-      {/* TaskFlow App S */}
+      {/* TaskFlow App */}
       <Link href="/progetti/taskflow-app-s" className="hub-card">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-        TaskFlow App S
+        TaskFlow App
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}><polyline points="9 18 15 12 9 6"/></svg>
       </Link>
 

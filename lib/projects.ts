@@ -3,27 +3,35 @@ export interface Project {
   title: string;
   description: string;
   link: string;
-  tags: string[]; // Esempio: ["Next.js", "API", "CSS"]
+  tags: string[];
 }
 
-// Esportiamo l'oggetto con tutti i tuoi progetti
+// Esportiamo l'oggetto con tutti i tuoi progetti aggiornati
 export const projectsData: Record<string, Project> = {
   "taskflow-premium": {
-    title: "TaskFlow Premium",
-    description: "Un task manager avanzato con filtri dinamici, persistenza nel localStorage e un'interfaccia utente curata in ogni dettaglio con uno stile Dark Mode e accenti Teal.",
+    title: "TaskFlow Dark",
+    description: "Il mio progetto più avanzato a livello di architettura. Un task manager sviluppato con Next.js e TypeScript che offre prestazioni elevate e gestione dei dati tramite LocalStorage API, garantendo la persistenza dei task anche dopo la chiusura del browser. Presenta un layout responsive curato con CSS Moderno (Flexbox/Grid).",
     link: "https://taskflow-premium.vercel.app",
-    tags: ["Next.js", "TypeScript", "LocalStorage"]
+    tags: ["Next.js", "TypeScript", "LocalStorage", "React", "Tailwind/CSS"]
   },
   "taskflow-app-s": {
-    title: "TaskFlow App S",
-    description: "La versione essenziale di TaskFlow, focalizzata sulla semplicità d'uso e sulla gestione rapida delle attività quotidiane.",
+    title: "TaskFlow App",
+    description: "Versione snella ed immediata focalizzata sulla semplicità d'uso. Sviluppata in React con Vite per la massima leggerezza, utilizza JavaScript ES6+ e una gestione dello stato reattiva (useState) per un'esperienza utente fluida.",
     link: "https://taskflow-app-s.vercel.app/",
-    tags: ["React", "JavaScript", "Vercel"]
+    tags: ["React", "JavaScript", "Vite", "Vercel", "State Management"]
   },
   "app-meteo": {
     title: "App Meteo",
-    description: "Applicazione meteo che interroga le API di OpenWeather per fornire dati in tempo reale. Include icone dinamiche che cambiano in base alle condizioni atmosferiche.",
+    description: "Un'applicazione meteo avanzata che integra le API di WeatherAPI.com per fornire dati in tempo reale, previsioni a 7 giorni e suggerimenti di ricerca. Include grafici dinamici della temperatura con Recharts, un sistema di multi-lingua (i18n) e un motore di effetti atmosferici personalizzato (pioggia, lampi) con animazioni CSS e Glassmorphism.",
     link: "https://alessandros0tgiu.github.io/app-meteo/",
-    tags: ["API Rest", "Fetch", "GitHub Pages"]
+    tags: [
+      "React",
+      "TypeScript",
+      "Recharts",
+      "i18next",
+      "WeatherAPI",
+      "CSS Glassmorphism",
+      "Vite"
+    ]
   }
 };
