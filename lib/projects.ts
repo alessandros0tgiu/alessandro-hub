@@ -24,15 +24,7 @@ export const projectsData: Record<string, Project> = {
     title: "App Meteo",
     description: "Un'applicazione meteo avanzata che integra le API di WeatherAPI.com per fornire dati in tempo reale, previsioni a 7 giorni e suggerimenti di ricerca. Include grafici dinamici della temperatura con Recharts, un sistema di multi-lingua (i18n) e un motore di effetti atmosferici personalizzato (pioggia, lampi) con animazioni CSS e Glassmorphism.",
     link: "https://alessandros0tgiu.github.io/app-meteo/",
-    tags: [
-      "React",
-      "TypeScript",
-      "Recharts",
-      "i18next",
-      "WeatherAPI",
-      "CSS Glassmorphism",
-      "Vite"
-    ]
+    tags: ["React", "TypeScript", "Recharts", "i18next", "WeatherAPI", "CSS Glassmorphism", "Vite"]
   },
   "barbershop": {
     title: "Barbershop Luxury",
