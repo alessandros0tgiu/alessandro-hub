@@ -33,5 +33,11 @@ export const projectsData: Record<string, Project> = {
       "CSS Glassmorphism",
       "Vite"
     ]
+  },
+  "barbershop": {
+    title: "Barbershop Luxury",
+    description: "Web Application Premium multi-portale (Cliente/Admin) progettata per la digitalizzazione dell'agenda di un salone di lusso a Sassari. Gestisce la prevenzione dei conflitti di orario in tempo reale tramite griglie orarie dinamiche a intervalli di 30 minuti. Sviluppata con Next.js App Router e TypeScript, l'app utilizza localStorage ed eventi di sistema per simulare la persistenza reattiva dei dati. L'architettura include già la predisposizione strutturale per la migrazione a un backend cloud centralizzato con Supabase e Prisma ORM.",
+    link: "https://barbershop-s.vercel.app/",
+    tags: ["Next.js", "TypeScript", "Prisma/Supabase Ready", "LocalStorage API", "Tailwind/CSS3"]
   }
 };
