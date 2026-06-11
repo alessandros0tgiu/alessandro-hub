@@ -63,3 +63,201 @@ body {
   letter-spacing: 2px;
   margin: 40px 0 20px 0;
 }
+/* Container per allineare i 3 pulsanti in orizzontale */
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  margin: 40px 0 60px 0;
+  height: 60px;
+}
+
+.tooltip-container {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 17px;
+  border-radius: 10px;
+}
+
+.tooltip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  border-radius: 15px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+    inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+    5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+  z-index: 10;
+  width: max-content;
+}
+
+.tooltip-container:hover .tooltip {
+  top: -110px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.icon-btn {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+}
+
+.icon-btn .layer {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  transition: transform 0.3s, border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.icon-btn:hover .layer {
+  transform: rotate(-35deg) skew(20deg);
+}
+
+.layer span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.icon-btn .text-btn {
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  opacity: 0;
+  font-weight: 600;
+  font-size: 12px;
+  transform: translateX(-50%);
+  transition: bottom 0.3s ease, opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.icon-btn:hover .text-btn {
+  bottom: -28px;
+  opacity: 1;
+}
+
+.icon-btn:hover .layer span:nth-child(1) { opacity: 0.2; }
+.icon-btn:hover .layer span:nth-child(2) { opacity: 0.4; transform: translate(5px, -5px); }
+.icon-btn:hover .layer span:nth-child(3) { opacity: 0.6; transform: translate(10px, -10px); }
+.icon-btn:hover .layer span:nth-child(4) { opacity: 0.8; transform: translate(15px, -15px); }
+
+/* --- ICONE SVG E ANIMAZIONI SPECIFICHE --- */
+
+/* 1. GITHUB STYLES */
+.githubSVG {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #24292e;
+}
+.icon-btn .layer span, .text-github { border: 1px solid #24292e; color: #24292e; }
+.text-github { color: #ffffff !important; text-shadow: 0px 1px 2px rgba(0,0,0,0.8); }
+.icon-btn:hover .layer span { box-shadow: -1px 1px 3px #24292e; }
+.githubSVG svg { width: 28px; height: 28px; fill: #fff; stroke: #fff; }
+
+/* 2. INSTAGRAM STYLES */
+.instagramSVG {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #e1306c;
+  transition: background 0.3s;
+}
+.icon-btn:hover .instagramSVG { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+.icon-btn .layer span, .text-instagram { border: 1px solid #e1306c; color: #e1306c; }
+.text-instagram { color: #ffffff !important; text-shadow: 0px 1px 2px rgba(0,0,0,0.8); }
+.icon-btn:hover .layer span { box-shadow: -1px 1px 3px #e1306c; }
+.instagramSVG svg { width: 28px; height: 28px; stroke: #fff; filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.3)); }
+
+/* 3. LINKEDIN STYLES */
+.linkedinSVG {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #0077b5;
+}
+.icon-btn .layer span, .text-linkedin { border: 1px solid #0077b5; color: #0077b5; }
+.text-linkedin { color: #ffffff !important; text-shadow: 0px 1px 2px rgba(0,0,0,0.8); }
+.icon-btn:hover .layer span { box-shadow: -1px 1px 3px #0077b5; }
+.linkedinSVG svg { width: 28px; height: 28px; stroke: #fff; filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.3)); }
+
+
+/* --- CARD DENTRO I TOOLTIP (STRUTTURA COMUNE) --- */
+.profile-tooltip {
+  padding: 10px;
+  border-radius: 10px 15px;
+}
+/* Colori specifici delle card del tooltip */
+.tooltip-container:nth-child(1) .profile-tooltip { background: #24292e; border: 1px solid #444d56; }
+.tooltip-container:nth-child(2) .profile-tooltip { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border: 1px solid #cc2366; }
+.tooltip-container:nth-child(3) .profile-tooltip { background: #0077b5; border: 1px solid #005582; }
+
+.user-tooltip {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.img-tooltip {
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+.tooltip-container:nth-child(1) .img-tooltip { color: #24292e; border: 1px solid #444d56; }
+.tooltip-container:nth-child(2) .img-tooltip { color: #e1306c; border: 1px solid #e1306c; }
+.tooltip-container:nth-child(3) .img-tooltip { color: #0077b5; border: 1px solid #005582; }
+
+.details-tooltip {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.name-tooltip {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.username-tooltip {
+  font-size: 12px;
+  color: #eeeeee;
+  opacity: 0.8;
+}
+
+.about-tooltip {
+  color: #ffffff;
+  font-size: 12px;
+  opacity: 0.9;
+  padding-top: 6px;
+  text-align: left;
+  font-weight: 500;
+}

@@ -1,7 +1,28 @@
 "use client";
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function Hub() {
+  // Stato per salvare il numero di repository reali di GitHub
+  const [githubRepos, setGithubRepos] = useState<number | string>("...");
+
+  useEffect(() => {
+    // Sostituisci 'alessandros0tgiu' con il tuo username esatto se diverso
+    fetch('https://api.github.com/users/alessandros0tgiu')
+      .then(res => {
+        if (!res.ok) throw new Error();
+        return res.json();
+      })
+      .then(data => {
+        // 'public_repos' restituisce il numero totale di repo pubbliche
+        setGithubRepos(data.public_repos);
+      })
+      .catch(() => {
+        // Fallback in caso di errore di rete o limite di richieste API superato
+        setGithubRepos("45+"); 
+      });
+  }, []);
+
   return (
     <div className="container">
       {/* Header */}
@@ -40,25 +61,102 @@ export default function Hub() {
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}><polyline points="9 18 15 12 9 6"/></svg>
       </Link>
 
-      {/* Social Links */}
+      {/* SEZIONE SOCIAL DINAMICA */}
       <h2 className="section-title">Social & Contacts</h2>
+      
+      <div className="social-row">
+        
+        {/* GITHUB (Dinamico) */}
+        <div className="tooltip-container">
+          <div className="tooltip">
+            <div className="profile-tooltip">
+              <div className="user-tooltip">
+                <div className="img-tooltip">Gh</div>
+                <div className="details-tooltip">
+                  <div className="name-tooltip">Alessandro</div>
+                  <div className="username-tooltip">@alessandros0tgiu</div>
+                </div>
+              </div>
+              {/* Qui viene stampato il numero reale preso dall'API */}
+              <div className="about-tooltip">{githubRepos} Repositories</div>
+            </div>
+          </div>
+          <a className="icon-btn" href="https://github.com/alessandros0tgiu" target="_blank" rel="noopener noreferrer">
+            <div className="layer">
+              <span></span><span></span><span></span><span></span>
+              <span className="githubSVG">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+              </span>
+            </div>
+            <div className="text-btn text-github">GitHub</div>
+          </a>
+        </div>
 
-      <a href="https://github.com/alessandros0tgiu" target="_blank" rel="noopener noreferrer" className="hub-card">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.28 1.15-.28 2.35 0 3.5-.73 1.02-1.08 2.25-1 3.5 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-        GitHub
-      </a>
+        {/* INSTAGRAM */}
+        <div className="tooltip-container">
+          <div className="tooltip">
+            <div className="profile-tooltip">
+              <div className="user-tooltip">
+                <div className="img-tooltip">Ig</div>
+                <div className="details-tooltip">
+                  <div className="name-tooltip">Alessandro</div>
+                  <div className="username-tooltip">@alessandro.sotgiuu</div>
+                </div>
+              </div>
+              {/* Modifica questo valore fisso quando necessario */}
+              <div className="about-tooltip">+900 Followers</div>
+            </div>
+          </div>
+          <a className="icon-btn" href="https://instagram.com/alessandro.sotgiuu" target="_blank" rel="noopener noreferrer">
+            <div className="layer">
+              <span></span><span></span><span></span><span></span>
+              <span className="instagramSVG">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </span>
+            </div>
+            <div className="text-btn text-instagram">Instagram</div>
+          </a>
+        </div>
 
-      <a href="https://instagram.com/alessandro.sotgiuu" target="_blank" rel="noopener noreferrer" className="hub-card">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        Instagram
-      </a>
+        {/* LINKEDIN */}
+        <div className="tooltip-container">
+          <div className="tooltip">
+            <div className="profile-tooltip">
+              <div className="user-tooltip">
+                <div className="img-tooltip">In</div>
+                <div className="details-tooltip">
+                  <div className="name-tooltip">Alessandro</div>
+                  <div className="username-tooltip">@alessandro-sotgiu</div>
+                </div>
+              </div>
+              {/* Modifica questo valore fisso quando necessario */}
+              <div className="about-tooltip">500+ Connections</div>
+            </div>
+          </div>
+          <a className="icon-btn" href="https://www.linkedin.com/in/alessandro-sotgiu-7931693a1/" target="_blank" rel="noopener noreferrer">
+            <div className="layer">
+              <span></span><span></span><span></span><span></span>
+              <span className="linkedinSVG">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </span>
+            </div>
+            <div className="text-btn text-linkedin">LinkedIn</div>
+          </a>
+        </div>
 
-      <a href="https://www.linkedin.com/in/alessandro-sotgiu-7931693a1/" target="_blank" rel="noopener noreferrer" className="hub-card">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        LinkedIn
-      </a>
+      </div>
 
-      <footer style={{ marginTop: '60px', color: '#333', fontSize: '0.8rem' }}>
+      <footer style={{ marginTop: '8px', color: '#333', fontSize: '0.8rem' }}>
         © {new Date().getFullYear()} • Built with Next.js
       </footer>
     </div>
