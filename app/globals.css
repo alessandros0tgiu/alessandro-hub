@@ -129,10 +129,10 @@ body {
   pointer-events: none;
   transition: all 0.3s;
   border-radius: 15px;
-  box-shadow: 
+  box-shadow:
     inset 5px 5px 5px rgba(0, 0, 0, 0.2),
     inset -5px -5px 15px rgba(255, 255, 255, 0.1),
-    5px 5px 15px rgba(0, 0, 0, 0.3), 
+    5px 5px 15px rgba(0, 0, 0, 0.3),
     -5px -5px 15px rgba(255, 255, 255, 0.1);
   z-index: 50;
   width: max-content;
@@ -192,11 +192,29 @@ body {
 }
 
 /* Animazione progressiva universale a 5 strati uguali per tutti */
-.icon-btn:hover .layer span:nth-child(1) { opacity: 0.2; }
-.icon-btn:hover .layer span:nth-child(2) { opacity: 0.4; transform: translate(5px, -5px); }
-.icon-btn:hover .layer span:nth-child(3) { opacity: 0.6; transform: translate(10px, -10px); }
-.icon-btn:hover .layer span:nth-child(4) { opacity: 0.8; transform: translate(15px, -15px); }
-.icon-btn:hover .layer span:nth-child(5) { opacity: 1; transform: translate(20px, -20px); }
+.icon-btn:hover .layer span:nth-child(1) {
+  opacity: 0.2;
+}
+
+.icon-btn:hover .layer span:nth-child(2) {
+  opacity: 0.4;
+  transform: translate(5px, -5px);
+}
+
+.icon-btn:hover .layer span:nth-child(3) {
+  opacity: 0.6;
+  transform: translate(10px, -10px);
+}
+
+.icon-btn:hover .layer span:nth-child(4) {
+  opacity: 0.8;
+  transform: translate(15px, -15px);
+}
+
+.icon-btn:hover .layer span:nth-child(5) {
+  opacity: 1;
+  transform: translate(20px, -20px);
+}
 
 /* --- COLORI SPECIFICI DI HOVER PER OGNI BRAND --- */
 
@@ -212,12 +230,38 @@ body {
   color: #ffffff !important;
   transition: background 0.3s ease;
 }
-.brand-github .layer { border: 3px solid #24292e; box-shadow: 0 0 15px rgba(36, 41, 46, 0.7), 0 0 20px rgba(36, 41, 46, 0.5); }
-.brand-github:hover .layer { box-shadow: 0 0 30px rgba(36, 41, 46, 1), 0 0 40px rgba(36, 41, 46, 0.7); border-color: #2f363d; }
-.brand-github .layer span, .text-github { border-color: #24292e; color: #24292e; }
-.brand-github:hover .layer span { box-shadow: -1px 1px 3px #24292e; }
-.brand-github:hover .githubSVG { background: #24292e; }
-.githubSVG svg { width: 32px; height: 32px; stroke: #ffffff !important; fill: #ffffff !important; filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.5)); }
+
+.brand-github .layer {
+  border: 3px solid #24292e;
+  box-shadow: 0 0 15px rgba(36, 41, 46, 0.7), 0 0 20px rgba(36, 41, 46, 0.5);
+}
+
+.brand-github:hover .layer {
+  box-shadow: 0 0 30px rgba(36, 41, 46, 1), 0 0 40px rgba(36, 41, 46, 0.7);
+  border-color: #2f363d;
+}
+
+.brand-github .layer span,
+.text-github {
+  border-color: #24292e;
+  color: #24292e;
+}
+
+.brand-github:hover .layer span {
+  box-shadow: -1px 1px 3px #24292e;
+}
+
+.brand-github:hover .githubSVG {
+  background: #24292e;
+}
+
+.githubSVG svg {
+  width: 32px;
+  height: 32px;
+  stroke: #ffffff !important;
+  fill: #ffffff !important;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.5));
+}
 
 /* 2. INSTAGRAM CONFIG */
 .instagramSVG {
@@ -231,12 +275,37 @@ body {
   color: #ffffff !important;
   transition: background 0.3s ease;
 }
-.brand-instagram .layer { border: 3px solid #e1306c; box-shadow: 0 0 15px rgba(225, 48, 108, 0.7), 0 0 20px rgba(225, 48, 108, 0.5); }
-.brand-instagram:hover .layer { box-shadow: 0 0 30px rgba(225, 48, 108, 1), 0 0 40px rgba(225, 48, 108, 0.7); border-color: #e1306c; }
-.brand-instagram .layer span, .text-instagram { border-color: #e1306c; color: #e1306c; }
-.brand-instagram:hover .layer span { box-shadow: -1px 1px 3px #e1306c; }
-.brand-instagram:hover .instagramSVG { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-.instagramSVG svg { width: 32px; height: 32px; stroke: #ffffff !important; filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.3)); }
+
+.brand-instagram .layer {
+  border: 3px solid #e1306c;
+  box-shadow: 0 0 15px rgba(225, 48, 108, 0.7), 0 0 20px rgba(225, 48, 108, 0.5);
+}
+
+.brand-instagram:hover .layer {
+  box-shadow: 0 0 30px rgba(225, 48, 108, 1), 0 0 40px rgba(225, 48, 108, 0.7);
+  border-color: #e1306c;
+}
+
+.brand-instagram .layer span,
+.text-instagram {
+  border-color: #e1306c;
+  color: #e1306c;
+}
+
+.brand-instagram:hover .layer span {
+  box-shadow: -1px 1px 3px #e1306c;
+}
+
+.brand-instagram:hover .instagramSVG {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.instagramSVG svg {
+  width: 32px;
+  height: 32px;
+  stroke: #ffffff !important;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+}
 
 /* 3. LINKEDIN CONFIG */
 .linkedinSVG {
@@ -250,21 +319,59 @@ body {
   color: #ffffff !important;
   transition: background 0.3s ease;
 }
-.brand-linkedin .layer { border: 3px solid #0077b5; box-shadow: 0 0 15px rgba(0, 119, 181, 0.7), 0 0 20px rgba(0, 119, 181, 0.5); }
-.brand-linkedin:hover .layer { box-shadow: 0 0 30px #0077b5, 0 0 40px rgba(0, 119, 181, 0.7); border-color: #0077b5; }
-.brand-linkedin .layer span, .text-linkedin { border-color: #0077b5; color: #0077b5; }
-.brand-linkedin:hover .layer span { box-shadow: -1px 1px 3px #0077b5; }
-.brand-linkedin:hover .linkedinSVG { background: #005582; }
-.linkedinSVG svg { width: 28px; height: 28px; stroke: #ffffff !important; fill: #ffffff !important; filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.3)); }
+
+.brand-linkedin .layer {
+  border: 3px solid #0077b5;
+  box-shadow: 0 0 15px rgba(0, 119, 181, 0.7), 0 0 20px rgba(0, 119, 181, 0.5);
+}
+
+.brand-linkedin:hover .layer {
+  box-shadow: 0 0 30px #0077b5, 0 0 40px rgba(0, 119, 181, 0.7);
+  border-color: #0077b5;
+}
+
+.brand-linkedin .layer span,
+.text-linkedin {
+  border-color: #0077b5;
+  color: #0077b5;
+}
+
+.brand-linkedin:hover .layer span {
+  box-shadow: -1px 1px 3px #0077b5;
+}
+
+.brand-linkedin:hover .linkedinSVG {
+  background: #005582;
+}
+
+.linkedinSVG svg {
+  width: 28px;
+  height: 28px;
+  stroke: #ffffff !important;
+  fill: #ffffff !important;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+}
 
 /* --- CARD DEI TOOLTIP INTERNI --- */
 .profile-tooltip {
   border-radius: 10px 15px;
   padding: 10px;
 }
-.brand-github .profile-tooltip { background: #24292e; border: 1px solid #444d56; }
-.brand-instagram .profile-tooltip { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border: 1px solid #cc2366; }
-.brand-linkedin .profile-tooltip { background: #0077b5; border: 1px solid #005582; }
+
+.brand-github .profile-tooltip {
+  background: #24292e;
+  border: 1px solid #444d56;
+}
+
+.brand-instagram .profile-tooltip {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  border: 1px solid #cc2366;
+}
+
+.brand-linkedin .profile-tooltip {
+  background: #0077b5;
+  border: 1px solid #005582;
+}
 
 .user-tooltip {
   display: flex;
@@ -282,9 +389,21 @@ body {
   justify-content: center;
   background: #fff;
 }
-.brand-github .img-tooltip { color: #24292e; border: 1px solid #444d56; }
-.brand-instagram .img-tooltip { color: #e1306c; border: 1px solid #e1306c; }
-.brand-linkedin .img-tooltip { color: #0077b5; border: 1px solid #005582; }
+
+.brand-github .img-tooltip {
+  color: #24292e;
+  border: 1px solid #444d56;
+}
+
+.brand-instagram .img-tooltip {
+  color: #e1306c;
+  border: 1px solid #e1306c;
+}
+
+.brand-linkedin .img-tooltip {
+  color: #0077b5;
+  border: 1px solid #005582;
+}
 
 .details-tooltip {
   display: flex;
@@ -311,4 +430,167 @@ body {
   padding-top: 5px;
   font-size: 12px;
   text-align: left;
+}
+
+/* ==========================================
+   NUOVO SWITCH ANIMATO CON NUVOLE E STELLE
+   ========================================== */
+
+.theme-toggle-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.theme-switch-label {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.theme-switch-checkbox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000000; /* Default: Sfondo Nero per Notte */
+  border: 1px solid #222;
+  transition: 0.4s;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.sun-moon {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 28px; /* Default: Spostato a destra per Notte */
+  bottom: 3px;
+  background-color: #ffffff; /* Default: Bianco Luna */
+  transition: 0.4s;
+}
+
+/* --- LOGICA DI TRANSIZIONE STATO (CHECKED = LIGHT MODE) --- */
+
+.theme-switch-checkbox:checked + .theme-slider {
+  background-color: #2196f3; /* Cielo Azzurro per Giorno */
+  border-color: #63a4ff;
+}
+
+.theme-switch-checkbox:checked + .theme-slider .sun-moon {
+  transform: translateX(-24px); /* Si sposta a sinistra */
+  background-color: #ffeb3b; /* Diventa Sole Giallo */
+}
+
+/* Dettagli della Luna (Crateri) */
+.moon-dot {
+  opacity: 1; /* Di default visibili sulla luna */
+  transition: 0.4s;
+  fill: #bdc3c7;
+}
+
+/* Nasconde i crateri quando si passa al sole */
+.theme-switch-checkbox:checked + .theme-slider .sun-moon .moon-dot {
+  opacity: 0;
+}
+
+.theme-slider.round {
+  border-radius: 34px;
+}
+
+.theme-slider.round .sun-moon {
+  border-radius: 50%;
+}
+
+/* Posizioni dei crateri lunari */
+#moon-dot-1 { left: 10px; top: 3px; position: absolute; width: 6px; height: 6px; z-index: 4; }
+#moon-dot-2 { left: 2px; top: 10px; position: absolute; width: 10px; height: 10px; z-index: 4; }
+#moon-dot-3 { left: 16px; top: 18px; position: absolute; width: 3px; height: 3px; z-index: 4; }
+
+/* Raggi Solari - Visibili solo nel sole (checked) */
+.light-ray {
+  position: absolute;
+  fill: #ffffff;
+  opacity: 0;
+  transition: 0.4s;
+  z-index: -1;
+}
+
+.theme-switch-checkbox:checked + .theme-slider .sun-moon .light-ray {
+  opacity: 0.15;
+}
+
+#light-ray-1 { left: -8px; top: -8px; width: 43px; height: 43px; }
+#light-ray-2 { left: -14px; top: -14px; width: 55px; height: 55px; }
+#light-ray-3 { left: -18px; top: -18px; width: 60px; height: 60px; }
+
+/* Animazioni e stili delle Nuvole */
+.cloud-light, .cloud-dark {
+  position: absolute;
+  transition: 0.4s;
+  opacity: 0; /* Di notte le nuvole sono invisibili */
+  animation: cloud-move 6s ease-in-out infinite;
+}
+
+.cloud-light { fill: #ffffff; }
+.cloud-dark { fill: #e0e0e0; animation-delay: 1s; }
+
+/* Mostra le nuvole solo di Giorno */
+.theme-switch-checkbox:checked + .theme-slider .sun-moon .cloud-light,
+.theme-switch-checkbox:checked + .theme-slider .sun-moon .cloud-dark {
+  opacity: 1;
+}
+
+#cloud-1 { left: 30px; top: 15px; width: 40px; }
+#cloud-2 { left: 44px; top: 10px; width: 20px; }
+#cloud-3 { left: 18px; top: 24px; width: 30px; }
+#cloud-4 { left: 36px; top: 18px; width: 40px; }
+#cloud-5 { left: 48px; top: 14px; width: 20px; }
+#cloud-6 { left: 22px; top: 26px; width: 30px; }
+
+@keyframes cloud-move {
+  0%, 100% { transform: translateX(0px); }
+  40% { transform: translateX(4px); }
+  80% { transform: translateX(-4px); }
+}
+
+/* Stelle del cielo notturno */
+.stars {
+  transform: translateY(0);
+  opacity: 1; /* Di default visibili di notte */
+  transition: 0.4s;
+}
+
+.star {
+  fill: #ffffff;
+  position: absolute;
+  transition: 0.4s;
+  animation: star-twinkle 2s infinite ease-in-out;
+}
+
+/* Nasconde le stelle di giorno e le sposta in alto */
+.theme-switch-checkbox:checked + .theme-slider .stars {
+  transform: translateY(-32px);
+  opacity: 0;
+}
+
+#star-1 { width: 14px; top: 4px; left: 4px; animation-delay: 0.3s; }
+#star-2 { width: 5px; top: 18px; left: 6px; }
+#star-3 { width: 10px; top: 22px; left: 14px; animation-delay: 0.6s; }
+#star-4 { width: 12px; top: 2px; left: 22px; animation-delay: 1.3s; }
+
+@keyframes star-twinkle {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
 }

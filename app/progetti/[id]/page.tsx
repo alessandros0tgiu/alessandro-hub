@@ -36,7 +36,7 @@ export default function ProjectDetail() {
         document.documentElement.setAttribute('data-theme', nextTheme);
     };
 
-    // FUNZIONE DI INVIO FORM (Mancava e causava l'errore)
+    // FUNZIONE DI INVIO FORM
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
@@ -63,7 +63,7 @@ export default function ProjectDetail() {
         } catch (error) {
             alert("Errore di connessione.");
         } finally {
-            setLoading(false);
+            loading && setLoading(false);
         }
     };
 
@@ -88,21 +88,71 @@ export default function ProjectDetail() {
                     ← Torna alla Home
                 </Link>
 
-                {/* Bottone Switch Giorno/Notte */}
-                <button 
-                    onClick={toggleTheme} 
-                    className="theme-toggle-btn" 
-                    aria-label="Cambia Tema"
-                    style={{ padding: '10px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                >
-                    {theme === 'dark' ? (
-                        /* Icona della Luna */
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-                    ) : (
-                        /* Icona del Sole */
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-                    )}
-                </button>
+                {/* Nuovo Switch Tema Animato (Nuvole & Stelle) */}
+                <div className="theme-toggle-container" style={{ width: 'auto', marginBottom: 0 }}>
+                    <label className="theme-switch-label">
+                        <input 
+                            type="checkbox" 
+                            className="theme-switch-checkbox" 
+                            checked={theme === 'light'} 
+                            onChange={toggleTheme} 
+                        />
+                        <div className="theme-slider round">
+                            <div className="sun-moon">
+                                <svg id="moon-dot-1" className="moon-dot" viewBox="0 0 100 100">
+                                    <circle cx={50} cy={50} r={50} />
+                                </svg>
+                                <svg id="moon-dot-2" className="moon-dot" viewBox="0 0 100 100">
+                                    <circle cx={50} cy={50} r={50} />
+                                </svg>
+                                <svg id="moon-dot-3" className="moon-dot" viewBox="0 0 100 100">
+                                    <circle cx={50} cy={50} r={50} />
+                                </svg>
+                                <svg id="light-ray-1" className="light-ray" viewBox="0 0 100 100">
+                                    <circle cx={50} cy={50} r={50} />
+                                </svg>
+                                <svg id="light-ray-2" className="light-ray" viewBox="0 0 100 100">
+                                    <circle cx={50} cy={50} r={50} />
+                                </svg>
+                                <svg id="light-ray-3" className="light-ray" viewBox="0 0 100 100">
+                                    <circle cx={50} cy={50} r={50} />
+                                </svg>
+                                <svg id="cloud-1" className="cloud-dark" viewBox="0 0 100 100">
+                                    <circle cx={50} cy={50} r={50} />
+                                </svg>
+                                <svg id="cloud-2" className="cloud-dark" viewBox="0 0 100 100">
+                                    <circle cx={50} cy={50} r={50} />
+                                </svg>
+                                <svg id="cloud-3" className="cloud-dark" viewBox="0 0 100 100">
+                                    <circle cx={50} cy={50} r={50} />
+                                </svg>
+                                <svg id="cloud-4" className="cloud-light" viewBox="0 0 100 100">
+                                    <circle cx={50} cy={50} r={50} />
+                                </svg>
+                                <svg id="cloud-5" className="cloud-light" viewBox="0 0 100 100">
+                                    <circle cx={50} cy={50} r={50} />
+                                </svg>
+                                <svg id="cloud-6" className="cloud-light" viewBox="0 0 100 100">
+                                    <circle cx={50} cy={50} r={50} />
+                                </svg>
+                            </div>
+                            <div className="stars">
+                                <svg id="star-1" className="star" viewBox="0 0 20 20">
+                                    <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z" />
+                                </svg>
+                                <svg id="star-2" className="star" viewBox="0 0 20 20">
+                                    <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z" />
+                                </svg>
+                                <svg id="star-3" className="star" viewBox="0 0 20 20">
+                                    <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z" />
+                                </svg>
+                                <svg id="star-4" className="star" viewBox="0 0 20 20">
+                                    <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </label>
+                </div>
             </div>
 
             <h1 style={{ fontSize: '2.5rem', color: 'var(--text-main)', marginTop: '10px' }}>{project.title}</h1>

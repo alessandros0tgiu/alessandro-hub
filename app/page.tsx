@@ -6,6 +6,15 @@ export default function Hub() {
   const [githubRepos, setGithubRepos] = useState<number | string>("...");
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
+  // 1. SINCRONIZZA IL TEMA ALL'APERTURA DELLA PAGINA (Risolve il bug dello sfondo/bottone)
+  useEffect(() => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') as 'dark' | 'light';
+    if (currentTheme) {
+      setTheme(currentTheme);
+    }
+  }, []);
+
+  // Recupero dati GitHub
   useEffect(() => {
     fetch('https://api.github.com/users/alessandros0tgiu')
       .then(res => {
@@ -28,15 +37,70 @@ export default function Hub() {
 
   return (
     <div className="container">
-      {/* Bottone Switch Tema */}
-      <div className="theme-toggle-container">
-        <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Cambia Tema">
-          {theme === 'dark' ? (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-          ) : (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-          )}
-        </button>
+      {/* Container Switch Tema Animato Isolato per la Home */}
+      <div className="theme-switch-wrapper" style={{ display: 'flex', justifyContent: 'flex-end', width: '100%', marginBottom: '20px' }}>
+        <label className="theme-switch-label">
+          <input 
+            type="checkbox" 
+            className="theme-switch-checkbox" 
+            checked={theme === 'light'} 
+            onChange={toggleTheme} 
+          />
+          <div className="theme-slider round">
+            <div className="sun-moon">
+              <svg id="moon-dot-1" className="moon-dot" viewBox="0 0 100 100">
+                <circle cx={50} cy={50} r={50} />
+              </svg>
+              <svg id="moon-dot-2" className="moon-dot" viewBox="0 0 100 100">
+                <circle cx={50} cy={50} r={50} />
+              </svg>
+              <svg id="moon-dot-3" className="moon-dot" viewBox="0 0 100 100">
+                <circle cx={50} cy={50} r={50} />
+              </svg>
+              <svg id="light-ray-1" className="light-ray" viewBox="0 0 100 100">
+                <circle cx={50} cy={50} r={50} />
+              </svg>
+              <svg id="light-ray-2" className="light-ray" viewBox="0 0 100 100">
+                <circle cx={50} cy={50} r={50} />
+              </svg>
+              <svg id="light-ray-3" className="light-ray" viewBox="0 0 100 100">
+                <circle cx={50} cy={50} r={50} />
+              </svg>
+              <svg id="cloud-1" className="cloud-dark" viewBox="0 0 100 100">
+                <circle cx={50} cy={50} r={50} />
+              </svg>
+              <svg id="cloud-2" className="cloud-dark" viewBox="0 0 100 100">
+                <circle cx={50} cy={50} r={50} />
+              </svg>
+              <svg id="cloud-3" className="cloud-dark" viewBox="0 0 100 100">
+                <circle cx={50} cy={50} r={50} />
+              </svg>
+              <svg id="cloud-4" className="cloud-light" viewBox="0 0 100 100">
+                <circle cx={50} cy={50} r={50} />
+              </svg>
+              <svg id="cloud-5" className="cloud-light" viewBox="0 0 100 100">
+                <circle cx={50} cy={50} r={50} />
+              </svg>
+              <svg id="cloud-6" className="cloud-light" viewBox="0 0 100 100">
+                <circle cx={50} cy={50} r={50} />
+              </svg>
+            </div>
+            <div className="stars">
+              <svg id="star-1" className="star" viewBox="0 0 20 20">
+                <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z" />
+              </svg>
+              <svg id="star-2" className="star" viewBox="0 0 20 20">
+                <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z" />
+              </svg>
+              <svg id="star-3" className="star" viewBox="0 0 20 20">
+                <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z" />
+              </svg>
+              <svg id="star-4" className="star" viewBox="0 0 20 20">
+                <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z" />
+              </svg>
+            </div>
+          </div>
+        </label>
       </div>
 
       {/* Header */}
@@ -71,7 +135,7 @@ export default function Hub() {
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}><polyline points="9 18 15 12 9 6"/></svg>
       </Link>
 
-      {/* SEZIONE SOCIAL COMPLETAMENTE UNIFICATA */}
+      {/* SEZIONE SOCIAL */}
       <h2 className="section-title">Social & Contacts</h2>
       
       <div className="social-row">
