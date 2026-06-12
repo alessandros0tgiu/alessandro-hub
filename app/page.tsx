@@ -3,28 +3,45 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function Hub() {
-  // Stato per salvare il numero di repository reali di GitHub
   const [githubRepos, setGithubRepos] = useState<number | string>("...");
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   useEffect(() => {
-    // Sostituisci 'alessandros0tgiu' con il tuo username esatto se diverso
     fetch('https://api.github.com/users/alessandros0tgiu')
       .then(res => {
         if (!res.ok) throw new Error();
         return res.json();
       })
       .then(data => {
-        // 'public_repos' restituisce il numero totale di repo pubbliche
         setGithubRepos(data.public_repos);
       })
       .catch(() => {
-        // Fallback in caso di errore di rete o limite di richieste API superato
         setGithubRepos("45+"); 
       });
   }, []);
 
+  // Cambia il data-theme sul tag html
+  const toggleTheme = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    document.documentElement.setAttribute('data-theme', nextTheme);
+  };
+
   return (
     <div className="container">
+      {/* Bottone con la Luna / Sole */}
+      <div className="theme-toggle-container">
+        <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Cambia Tema">
+          {theme === 'dark' ? (
+            /* Icona della Luna per quando sei in modalità scura */
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          ) : (
+            /* Icona del Sole per quando passi alla modalità chiara */
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          )}
+        </button>
+      </div>
+
       {/* Header */}
       <img src="https://github.com/alessandros0tgiu.png" alt="Profile" className="profile-img" />
       <h1 style={{ fontSize: '2rem', marginBottom: '8px' }}>Alessandro</h1>
@@ -66,7 +83,7 @@ export default function Hub() {
       
       <div className="social-row">
         
-        {/* GITHUB (Dinamico) */}
+        {/* GITHUB */}
         <div className="tooltip-container">
           <div className="tooltip">
             <div className="profile-tooltip">
@@ -77,7 +94,6 @@ export default function Hub() {
                   <div className="username-tooltip">@alessandros0tgiu</div>
                 </div>
               </div>
-              {/* Qui viene stampato il numero reale preso dall'API */}
               <div className="about-tooltip">{githubRepos} Repositories</div>
             </div>
           </div>
@@ -105,7 +121,6 @@ export default function Hub() {
                   <div className="username-tooltip">@alessandro.sotgiuu</div>
                 </div>
               </div>
-              {/* Modifica questo valore fisso quando necessario */}
               <div className="about-tooltip">+900 Followers</div>
             </div>
           </div>
@@ -135,7 +150,6 @@ export default function Hub() {
                   <div className="username-tooltip">@alessandro-sotgiu</div>
                 </div>
               </div>
-              {/* Modifica questo valore fisso quando necessario */}
               <div className="about-tooltip">500+ Connections</div>
             </div>
           </div>
@@ -156,8 +170,8 @@ export default function Hub() {
 
       </div>
 
-      <footer style={{ marginTop: '8px', color: '#333', fontSize: '0.8rem' }}>
-        © {new Date().getFullYear()} • Built with Next.js
+      <footer style={{ marginTop: '8px', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
+        © 2026 • Built with Next.js
       </footer>
     </div>
   );

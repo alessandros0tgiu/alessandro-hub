@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { projectsData } from '@/lib/projects';
 import Link from 'next/link';
@@ -18,6 +18,25 @@ export default function ProjectDetail() {
     const [loading, setLoading] = useState(false);
     const [userName, setUserName] = useState("");
 
+    // Stato per il tema (Chiaro / Scuro)
+    const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+
+    // Sincronizza lo stato locale del bottone con il tema attualmente attivo sull'HTML
+    useEffect(() => {
+        const currentTheme = document.documentElement.getAttribute('data-theme') as 'dark' | 'light';
+        if (currentTheme) {
+            setTheme(currentTheme);
+        }
+    }, []);
+
+    // Cambia il tema sul tag HTML e aggiorna lo stato locale
+    const toggleTheme = () => {
+        const nextTheme = theme === 'dark' ? 'light' : 'dark';
+        setTheme(nextTheme);
+        document.documentElement.setAttribute('data-theme', nextTheme);
+    };
+
+    // FUNZIONE DI INVIO FORM (Mancava e causava l'errore)
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
@@ -52,7 +71,7 @@ export default function ProjectDetail() {
     if (!project) {
         return (
             <div className="container" style={{ textAlign: 'center', marginTop: '100px' }}>
-                <h1 style={{ color: 'white' }}>Progetto non trovato</h1>
+                <h1 style={{ color: 'var(--text-main)' }}>Progetto non trovato</h1>
                 <Link href="/" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>
                     Torna alla Home
                 </Link>
@@ -62,12 +81,32 @@ export default function ProjectDetail() {
 
     return (
         <div className="container" style={{ textAlign: 'left', maxWidth: '600px' }}>
-            <Link href="/" style={{ color: 'var(--accent)', textDecoration: 'none', fontSize: '0.9rem' }}>
-                ← Torna alla Home
-            </Link>
+            
+            {/* Barra superiore: contiene il tasto torna indietro e lo Switch del Tema */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <Link href="/" style={{ color: 'var(--accent)', textDecoration: 'none', fontSize: '0.9rem' }}>
+                    ← Torna alla Home
+                </Link>
 
-            <h1 style={{ marginTop: '20px', fontSize: '2.5rem', color: 'white' }}>{project.title}</h1>
-            <p style={{ color: '#ccc', lineHeight: '1.6', fontSize: '1.1rem', marginBottom: '20px' }}>
+                {/* Bottone Switch Giorno/Notte */}
+                <button 
+                    onClick={toggleTheme} 
+                    className="theme-toggle-btn" 
+                    aria-label="Cambia Tema"
+                    style={{ padding: '10px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >
+                    {theme === 'dark' ? (
+                        /* Icona della Luna */
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                    ) : (
+                        /* Icona del Sole */
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    )}
+                </button>
+            </div>
+
+            <h1 style={{ fontSize: '2.5rem', color: 'var(--text-main)', marginTop: '10px' }}>{project.title}</h1>
+            <p style={{ color: 'var(--text-muted)', lineHeight: '1.6', fontSize: '1.1rem', marginBottom: '20px' }}>
                 {project.description}
             </p>
 
@@ -83,13 +122,14 @@ export default function ProjectDetail() {
                         key={tag} 
                         style={{
                             fontSize: '0.75rem',
-                            background: 'rgba(45, 212, 191, 0.1)',
+                            background: 'var(--accent-glow)',
                             color: 'var(--accent)',
                             padding: '5px 12px',
                             borderRadius: '50px',
-                            border: '1px solid rgba(45, 212, 191, 0.3)',
+                            border: '1px solid var(--accent)',
                             fontWeight: '500',
-                            letterSpacing: '0.5px'
+                            letterSpacing: '0.5px',
+                            opacity: 0.9
                         }}
                     >
                         {tag}
@@ -104,29 +144,29 @@ export default function ProjectDetail() {
             {/* SEZIONE FEEDBACK */}
             <div style={{
                 marginTop: '50px', padding: '30px', border: '1px solid var(--border)',
-                borderRadius: '24px', background: 'var(--panel)', boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+                borderRadius: '24px', background: 'var(--panel)', boxShadow: '0 10px 30px var(--accent-glow)'
             }}>
 
                 {!submitted ? (
                     <>
-                        <h3 style={{ marginBottom: '10px', color: 'white' }}>Lascia un feedback</h3>
+                        <h3 style={{ marginBottom: '10px', color: 'var(--text-main)' }}>Lascia un feedback</h3>
                         <form onSubmit={handleSubmit}>
                             <div style={{ marginBottom: '20px' }}>
-                                <label style={{ display: 'block', fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>Il tuo Nome</label>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Il tuo Nome</label>
                                 <input
                                     type="text"
                                     name="name"
                                     required
                                     placeholder="Esempio: Mario Rossi"
                                     style={{
-                                        width: '100%', padding: '12px', background: '#000', border: '1px solid #222',
-                                        color: 'white', borderRadius: '10px', outline: 'none'
+                                        width: '100%', padding: '12px', background: 'var(--background)', border: '1px solid var(--border)',
+                                        color: 'var(--text-main)', borderRadius: '10px', outline: 'none', boxSizing: 'border-box'
                                     }}
                                 />
                             </div>
 
                             <div style={{ marginBottom: '20px' }}>
-                                <label style={{ display: 'block', fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>Valutazione</label>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Valutazione</label>
                                 <div style={{ display: 'flex', gap: '5px' }}>
                                     {[1, 2, 3, 4, 5].map((star) => (
                                         <button
@@ -137,7 +177,7 @@ export default function ProjectDetail() {
                                             onMouseLeave={() => setHover(0)}
                                             style={{
                                                 background: 'none', border: 'none', cursor: 'pointer', outline: 'none',
-                                                fontSize: '1.8rem', color: (hover || rating) >= star ? 'var(--accent)' : '#222',
+                                                fontSize: '1.8rem', color: (hover || rating) >= star ? 'var(--accent)' : 'var(--border)',
                                                 transition: 'transform 0.1s, color 0.2s',
                                                 transform: (hover || rating) >= star ? 'scale(1.1)' : 'scale(1)'
                                             }}
@@ -150,14 +190,14 @@ export default function ProjectDetail() {
                             </div>
 
                             <div style={{ marginBottom: '20px' }}>
-                                <label style={{ display: 'block', fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>Suggerimenti</label>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Suggerimenti</label>
                                 <textarea
                                     name="message"
                                     required
                                     placeholder="Cosa posso migliorare?"
                                     style={{
-                                        width: '100%', padding: '12px', background: '#000', border: '1px solid #222',
-                                        color: 'white', borderRadius: '10px', minHeight: '100px', outline: 'none'
+                                        width: '100%', padding: '12px', background: 'var(--background)', border: '1px solid var(--border)',
+                                        color: 'var(--text-main)', borderRadius: '10px', minHeight: '100px', outline: 'none', boxSizing: 'border-box'
                                     }}
                                 />
                             </div>
@@ -169,8 +209,10 @@ export default function ProjectDetail() {
                                 type="submit"
                                 disabled={rating === 0 || loading}
                                 style={{
-                                    width: '100%', background: rating > 0 ? 'var(--accent)' : '#111',
-                                    color: rating > 0 ? 'black' : '#444', border: 'none',
+                                    width: '100%', 
+                                    background: rating > 0 ? 'var(--accent)' : 'var(--border)',
+                                    color: rating > 0 ? '#000000' : 'var(--text-muted)', 
+                                    border: 'none',
                                     padding: '15px', borderRadius: '12px', fontWeight: 'bold',
                                     cursor: rating > 0 ? 'pointer' : 'not-allowed', transition: '0.3s',
                                     opacity: loading ? 0.7 : 1
@@ -184,13 +226,13 @@ export default function ProjectDetail() {
                     <div style={{ textAlign: 'center', padding: '20px' }}>
                         <div style={{ fontSize: '3.5rem', marginBottom: '15px' }}>✨</div>
                         <h2 style={{ color: 'var(--accent)', marginBottom: '10px' }}>Grazie, {userName}!</h2>
-                        <p style={{ color: '#ccc', lineHeight: '1.5' }}>
+                        <p style={{ color: 'var(--text-muted)', lineHeight: '1.5' }}>
                             Il tuo feedback per <strong>{project.title}</strong> è stato inviato correttamente.
                         </p>
                         <button
                             onClick={() => { setSubmitted(false); setRating(0); }}
                             style={{
-                                background: 'rgba(45, 212, 191, 0.1)', border: '1px solid var(--accent)',
+                                background: 'var(--accent-glow)', border: '1px solid var(--accent)',
                                 color: 'var(--accent)', padding: '10px 20px', borderRadius: '10px',
                                 cursor: 'pointer', marginTop: '25px', fontSize: '0.9rem'
                             }}

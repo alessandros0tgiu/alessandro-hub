@@ -1,4 +1,5 @@
 :root {
+  /* TEMA SCURO (Il tuo default originale) */
   --background: #000000;
   --panel: #050505;
   --accent: #2DD4BF;
@@ -8,6 +9,17 @@
   --text-muted: #666666;
 }
 
+[data-theme="light"] {
+  /* TEMA CHIARO (Applicato al click della Luna) */
+  --background: #f8fafc;
+  --panel: #ffffff;
+  --accent: #0d9488;
+  --accent-glow: rgba(13, 148, 136, 0.1);
+  --border: #e2e8f0;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+}
+
 body {
   background-color: var(--background);
   color: var(--text-main);
@@ -15,6 +27,7 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transizione morbida */
 }
 
 .container {
@@ -22,6 +35,34 @@ body {
   width: 100%;
   padding: 60px 20px;
   text-align: center;
+  position: relative;
+}
+
+/* Zona Bottone Switch Tema in alto a destra */
+.theme-toggle-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: -20px;
+}
+
+.theme-toggle-btn {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--accent);
+  transform: scale(1.05);
 }
 
 .profile-img {
@@ -44,16 +85,16 @@ body {
   justify-content: center;
   gap: 12px;
   text-decoration: none;
-  color: white;
+  color: var(--text-main); /* Cambia colore dinamicamente */
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .hub-card:hover {
   border-color: var(--accent);
-  background: #0a0a0a;
+  background: var(--panel);
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(45, 212, 191, 0.1);
+  box-shadow: 0 10px 30px var(--accent-glow);
 }
 
 .section-title {
@@ -63,6 +104,7 @@ body {
   letter-spacing: 2px;
   margin: 40px 0 20px 0;
 }
+
 /* Container per allineare i 3 pulsanti in orizzontale */
 .social-row {
   display: flex;
@@ -167,7 +209,7 @@ body {
   background: #24292e;
 }
 .icon-btn .layer span, .text-github { border: 1px solid #24292e; color: #24292e; }
-.text-github { color: #ffffff !important; text-shadow: 0px 1px 2px rgba(0,0,0,0.8); }
+.text-github { color: var(--text-main) !important; }
 .icon-btn:hover .layer span { box-shadow: -1px 1px 3px #24292e; }
 .githubSVG svg { width: 28px; height: 28px; fill: #fff; stroke: #fff; }
 
@@ -184,7 +226,7 @@ body {
 }
 .icon-btn:hover .instagramSVG { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
 .icon-btn .layer span, .text-instagram { border: 1px solid #e1306c; color: #e1306c; }
-.text-instagram { color: #ffffff !important; text-shadow: 0px 1px 2px rgba(0,0,0,0.8); }
+.text-instagram { color: var(--text-main) !important; }
 .icon-btn:hover .layer span { box-shadow: -1px 1px 3px #e1306c; }
 .instagramSVG svg { width: 28px; height: 28px; stroke: #fff; filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.3)); }
 
@@ -199,17 +241,15 @@ body {
   background: #0077b5;
 }
 .icon-btn .layer span, .text-linkedin { border: 1px solid #0077b5; color: #0077b5; }
-.text-linkedin { color: #ffffff !important; text-shadow: 0px 1px 2px rgba(0,0,0,0.8); }
+.text-linkedin { color: var(--text-main) !important; }
 .icon-btn:hover .layer span { box-shadow: -1px 1px 3px #0077b5; }
 .linkedinSVG svg { width: 28px; height: 28px; stroke: #fff; filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.3)); }
-
 
 /* --- CARD DENTRO I TOOLTIP (STRUTTURA COMUNE) --- */
 .profile-tooltip {
   padding: 10px;
   border-radius: 10px 15px;
 }
-/* Colori specifici delle card del tooltip */
 .tooltip-container:nth-child(1) .profile-tooltip { background: #24292e; border: 1px solid #444d56; }
 .tooltip-container:nth-child(2) .profile-tooltip { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border: 1px solid #cc2366; }
 .tooltip-container:nth-child(3) .profile-tooltip { background: #0077b5; border: 1px solid #005582; }
