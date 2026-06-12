@@ -463,7 +463,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #000000; /* Default: Sfondo Nero per Notte */
+  background-color: #000000;
+  /* Default: Sfondo Nero per Notte */
   border: 1px solid #222;
   transition: 0.4s;
   z-index: 0;
@@ -475,33 +476,39 @@ body {
   content: "";
   height: 26px;
   width: 26px;
-  left: 28px; /* Default: Spostato a destra per Notte */
+  left: 28px;
+  /* Default: Spostato a destra per Notte */
   bottom: 3px;
-  background-color: #ffffff; /* Default: Bianco Luna */
+  background-color: #ffffff;
+  /* Default: Bianco Luna */
   transition: 0.4s;
 }
 
 /* --- LOGICA DI TRANSIZIONE STATO (CHECKED = LIGHT MODE) --- */
 
-.theme-switch-checkbox:checked + .theme-slider {
-  background-color: #2196f3; /* Cielo Azzurro per Giorno */
+.theme-switch-checkbox:checked+.theme-slider {
+  background-color: #2196f3;
+  /* Cielo Azzurro per Giorno */
   border-color: #63a4ff;
 }
 
-.theme-switch-checkbox:checked + .theme-slider .sun-moon {
-  transform: translateX(-24px); /* Si sposta a sinistra */
-  background-color: #ffeb3b; /* Diventa Sole Giallo */
+.theme-switch-checkbox:checked+.theme-slider .sun-moon {
+  transform: translateX(-24px);
+  /* Si sposta a sinistra */
+  background-color: #ffeb3b;
+  /* Diventa Sole Giallo */
 }
 
 /* Dettagli della Luna (Crateri) */
 .moon-dot {
-  opacity: 1; /* Di default visibili sulla luna */
+  opacity: 1;
+  /* Di default visibili sulla luna */
   transition: 0.4s;
   fill: #bdc3c7;
 }
 
 /* Nasconde i crateri quando si passa al sole */
-.theme-switch-checkbox:checked + .theme-slider .sun-moon .moon-dot {
+.theme-switch-checkbox:checked+.theme-slider .sun-moon .moon-dot {
   opacity: 0;
 }
 
@@ -514,9 +521,32 @@ body {
 }
 
 /* Posizioni dei crateri lunari */
-#moon-dot-1 { left: 10px; top: 3px; position: absolute; width: 6px; height: 6px; z-index: 4; }
-#moon-dot-2 { left: 2px; top: 10px; position: absolute; width: 10px; height: 10px; z-index: 4; }
-#moon-dot-3 { left: 16px; top: 18px; position: absolute; width: 3px; height: 3px; z-index: 4; }
+#moon-dot-1 {
+  left: 10px;
+  top: 3px;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  z-index: 4;
+}
+
+#moon-dot-2 {
+  left: 2px;
+  top: 10px;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: 4;
+}
+
+#moon-dot-3 {
+  left: 16px;
+  top: 18px;
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  z-index: 4;
+}
 
 /* Raggi Solari - Visibili solo nel sole (checked) */
 .light-ray {
@@ -527,48 +557,113 @@ body {
   z-index: -1;
 }
 
-.theme-switch-checkbox:checked + .theme-slider .sun-moon .light-ray {
+.theme-switch-checkbox:checked+.theme-slider .sun-moon .light-ray {
   opacity: 0.15;
 }
 
-#light-ray-1 { left: -8px; top: -8px; width: 43px; height: 43px; }
-#light-ray-2 { left: -14px; top: -14px; width: 55px; height: 55px; }
-#light-ray-3 { left: -18px; top: -18px; width: 60px; height: 60px; }
+#light-ray-1 {
+  left: -8px;
+  top: -8px;
+  width: 43px;
+  height: 43px;
+}
+
+#light-ray-2 {
+  left: -14px;
+  top: -14px;
+  width: 55px;
+  height: 55px;
+}
+
+#light-ray-3 {
+  left: -18px;
+  top: -18px;
+  width: 60px;
+  height: 60px;
+}
 
 /* Animazioni e stili delle Nuvole */
-.cloud-light, .cloud-dark {
+.cloud-light,
+.cloud-dark {
   position: absolute;
   transition: 0.4s;
-  opacity: 0; /* Di notte le nuvole sono invisibili */
+  opacity: 0;
+  /* Di notte le nuvole sono invisibili */
   animation: cloud-move 6s ease-in-out infinite;
 }
 
-.cloud-light { fill: #ffffff; }
-.cloud-dark { fill: #e0e0e0; animation-delay: 1s; }
+.cloud-light {
+  fill: #ffffff;
+}
+
+.cloud-dark {
+  fill: #e0e0e0;
+  animation-delay: 1s;
+}
 
 /* Mostra le nuvole solo di Giorno */
-.theme-switch-checkbox:checked + .theme-slider .sun-moon .cloud-light,
-.theme-switch-checkbox:checked + .theme-slider .sun-moon .cloud-dark {
+.theme-switch-checkbox:checked+.theme-slider .sun-moon .cloud-light,
+.theme-switch-checkbox:checked+.theme-slider .sun-moon .cloud-dark {
   opacity: 1;
 }
 
-#cloud-1 { left: 30px; top: 15px; width: 40px; }
-#cloud-2 { left: 44px; top: 10px; width: 20px; }
-#cloud-3 { left: 18px; top: 24px; width: 30px; }
-#cloud-4 { left: 36px; top: 18px; width: 40px; }
-#cloud-5 { left: 48px; top: 14px; width: 20px; }
-#cloud-6 { left: 22px; top: 26px; width: 30px; }
+#cloud-1 {
+  left: 30px;
+  top: 15px;
+  width: 40px;
+}
+
+#cloud-2 {
+  left: 44px;
+  top: 10px;
+  width: 20px;
+}
+
+#cloud-3 {
+  left: 18px;
+  top: 24px;
+  width: 30px;
+}
+
+#cloud-4 {
+  left: 36px;
+  top: 18px;
+  width: 40px;
+}
+
+#cloud-5 {
+  left: 48px;
+  top: 14px;
+  width: 20px;
+}
+
+#cloud-6 {
+  left: 22px;
+  top: 26px;
+  width: 30px;
+}
 
 @keyframes cloud-move {
-  0%, 100% { transform: translateX(0px); }
-  40% { transform: translateX(4px); }
-  80% { transform: translateX(-4px); }
+
+  0%,
+  100% {
+    transform: translateX(0px);
+  }
+
+  40% {
+    transform: translateX(4px);
+  }
+
+  80% {
+    transform: translateX(-4px);
+  }
 }
 
 /* Stelle del cielo notturno */
 .stars {
   transform: translateY(0);
-  opacity: 1; /* Di default visibili di notte */
+  opacity: 1;
+  /* Di default visibili di notte */
   transition: 0.4s;
 }
 
@@ -580,17 +675,83 @@ body {
 }
 
 /* Nasconde le stelle di giorno e le sposta in alto */
-.theme-switch-checkbox:checked + .theme-slider .stars {
+.theme-switch-checkbox:checked+.theme-slider .stars {
   transform: translateY(-32px);
   opacity: 0;
 }
 
-#star-1 { width: 14px; top: 4px; left: 4px; animation-delay: 0.3s; }
-#star-2 { width: 5px; top: 18px; left: 6px; }
-#star-3 { width: 10px; top: 22px; left: 14px; animation-delay: 0.6s; }
-#star-4 { width: 12px; top: 2px; left: 22px; animation-delay: 1.3s; }
+#star-1 {
+  width: 14px;
+  top: 4px;
+  left: 4px;
+  animation-delay: 0.3s;
+}
+
+#star-2 {
+  width: 5px;
+  top: 18px;
+  left: 6px;
+}
+
+#star-3 {
+  width: 10px;
+  top: 22px;
+  left: 14px;
+  animation-delay: 0.6s;
+}
+
+#star-4 {
+  width: 12px;
+  top: 2px;
+  left: 22px;
+  animation-delay: 1.3s;
+}
 
 @keyframes star-twinkle {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.2); opacity: 1; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 520px) {
+
+  /* Evita che l'ingombro del padding generi scroll orizzontale */
+  .container {
+    padding: 30px 16px;
+    box-sizing: border-box;
+  }
+
+  .hub-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Allarga lo spazio verticale per ospitare le scritte sempre visibili */
+  .social-row {
+    gap: 20px;
+    height: 90px;
+    margin: 40px 0 40px 0;
+  }
+
+
+
+  /* FORZA LE SCRITTE SOTTO AD ESSERE SEMPRE VISIBILI SENZA FARE HOVER */
+  .icon-btn .text-btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -30px;
+    /* Le blocca sotto il rispettivo cerchio */
+    opacity: 1;
+    /* Sempre visibili di default solo su smartphone */
+    font-weight: 600;
+  }
 }
